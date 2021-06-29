@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../styles/Home.module.css'
 
 
 function Main(){
 
-    // const [location, min, max, avg, stand] = React.useState()
+    // const [stand, setStand] = React.useState({
+    //     location : 'irbid',
+    //     min : 0,
+    //     max : 0,
+    //     avg : 0
+    
+    // })
+    const [location, setLocation] = React.useState('Irbid')
+    const [min, setMin] = React.useState(0)
+    const [max, setMax] = React.useState(0)
+    const [avg, setAvg] = React.useState(0)
 
-    // const handleclick = (e) =>{
-    //     e.preventDefault();
-    //     location = e.target.location
-    //     min = e.target.min
-    //     max = e.target.max
-    //     avg = e.target.avg
-    // }
     
 
     return(
@@ -20,53 +23,37 @@ function Main(){
             <h2>Create Cookie Stand</h2>
         <form>
             <label>Location</label>
-            <input name="location" type="text" value={location} /> <br/>
+            <input placeholder={location}  type="text" title = 'location' onChange={event=>setLocation(event.target.value)}/> <br/>
             <label>Minimum Customer per Hour</label>
-            <input name="min" type="text" value={min} />
+            <input placeholder={min} name="min" type="number" title = 'min' onChange={event=>setMin(event.target.value)} />
             <label>Maximum Customer per Hour</label>
-            <input name="max" type="text" value={max} />
+            <input placeholder={max} name="max" type="number" title = 'max' onChange={event=>setMax(event.target.value)} />
             <label>Average Cookies per Sale </label>
-            <input name="avg" type="text" value={avg} />
-            <button type='submit' >Create</button>
+            <input placeholder={avg} name="avg" type="number" title = 'avg' onChange={event=>setAvg(event.target.value)} />
+            <button  
+            onClick={event=>{
+                event.preventDefault()
+                // console.log(event.target.value)
+                // setStand({
+                //     location :event.target.location,
+                //     min :event.target.min,
+                //     max :event.target.max,
+                //     avg :event.target.avg
+                // }) 
+                // console.log(stand)
+            }} 
+            >Create</button>
         </form>
+        <p>Report Table Coming Soon... </p>
+        {/* <textarea placeholder={stand}></textarea> */}
+        <p><span>location : {location}</span>,
+        <span>min : {min}</span>,
+        <span>max : {max}</span>,
+        <span>avg : {avg}</span>
+        </p>
 
       </main>
     )
 }
 
 export default Main;
-
-/* <p className={styles.description}>
-Get started by editing{' '}
-<code className={styles.code}>pages/index.js</code>
-</p>
-
-<div className={styles.grid}>
-<a href="https://nextjs.org/docs" className={styles.card}>
-  <h2>Documentation &rarr;</h2>
-  <p>Find in-depth information about Next.js features and API.</p>
-</a>
-
-<a href="https://nextjs.org/learn" className={styles.card}>
-  <h2>Learn &rarr;</h2>
-  <p>Learn about Next.js in an interactive course with quizzes!</p>
-</a>
-
-<a
-  href="https://github.com/vercel/next.js/tree/master/examples"
-  className={styles.card}
->
-  <h2>Examples &rarr;</h2>
-  <p>Discover and deploy boilerplate example Next.js projects.</p>
-</a>
-
-<a
-  href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-  className={styles.card}
->
-  <h2>Deploy &rarr;</h2>
-  <p>
-    Instantly deploy your Next.js site to a public URL with Vercel.
-  </p>
-</a>
-</div> */
