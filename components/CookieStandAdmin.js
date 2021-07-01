@@ -5,7 +5,7 @@ import Main from './Main'
 import React from 'react'
 
 
-function CookieStandAdmin(){
+function CookieStandAdmin(props){
 
   const [cookieStands, setCookieStands] = React.useState([]);
 
@@ -25,7 +25,7 @@ function CookieStandAdmin(){
     <div >
       <Head1 title='Cookie Stand Admin' />
 
-      <Header />
+      <Header path={props.path} page={props.page} />
 
       <Main cookieStands={cookieStands} setCookieStands={setCookieStands} onCreate={onCreate} />
       

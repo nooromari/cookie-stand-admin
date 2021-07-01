@@ -1,7 +1,11 @@
-import Link from 'next'
+import Link from "next/link";
 
-export default function overview(){
+ function overview(){
     return(
-        <Link href="/"><a>Return to Main page</a></Link>
+        <Link href="/">
+            <a>Return to Main page</a>
+        </Link>
     )
 }
+
+export default overview;
