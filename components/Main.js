@@ -4,6 +4,7 @@ import ReportTable from './ReportTable';
 import CreateForm from './CreateForm';
 
 function Main({cookieStands, setCookieStands, onCreate, open_hours, hoursTotals}){
+    
 
     return(
         <main className={styles.main}>
