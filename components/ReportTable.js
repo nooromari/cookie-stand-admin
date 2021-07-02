@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 function ReportTable({cookieStands, standTotals, open_hours, hoursTotals}){
 
+
     if (cookieStands.length) {
         return (
             <table className="w-1/2 mx-auto border-4 border-collapse border-green-500 mt-10 bg-green-200">
@@ -14,8 +15,8 @@ function ReportTable({cookieStands, standTotals, open_hours, hoursTotals}){
                 </thead>
                 <tbody>
 
-                    {cookieStands.map(stand => (
-                        <tr key={stand.id} className="bg-green-200 odd:bg-green-300 ">
+                    {cookieStands.map((stand,k) => (
+                        <tr key={k} className="bg-green-200 odd:bg-green-300 ">
                             <td className="pl-2 border border-green-500 p-1">{stand.location}</td>
                             {stand.hourly_sales.map((sales,i) => <td key={i} className="pl-2 border border-green-500 p-1">{sales}</td> )}
                             <td className="pl-2 border border-green-500 p-1">{stand.hourly_sales.reduce((a,h)=> a+=h, 0)}</td>
