@@ -10,7 +10,7 @@ function CookieStandAdmin(props){
   const [cookieStands, setCookieStands] = React.useState([]);
   const open_hours = [6,7,8,9,10,11,12,1,2,3,4,5,6,7];
 
-  const [hoursTotals, sethoursTotals] = React.useState([48, 42, 30, 24, 42, 24, 36, 42, 42, 48, 36, 42, 24, 36]);
+  const [hoursTotals, sethoursTotals] = React.useState([111, 150, 230, 240, 421, 124, 236, 142, 272, 298, 136, 342, 524, 136]);
 
   const onCreate = (e) =>{
       e.preventDefault()
