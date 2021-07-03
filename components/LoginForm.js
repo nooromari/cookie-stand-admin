@@ -4,3 +4,5 @@ function LoginForm(){
         <h1>Login</h1>
     )
 }
+
+export default LoginForm;
