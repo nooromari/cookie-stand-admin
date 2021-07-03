@@ -1,5 +1,5 @@
 import Head1 from './Head'
-import Header from './Header'
+import CookieStandHeader from './CookieStandHeader'
 import Footer from './Footer'
 import Main from './Main'
 import React, { useEffect, useState } from 'react'
@@ -27,7 +27,7 @@ function CookieStandAdmin(props){
       <div >
       <Head1 title='Cookie Stand Admin' />
 
-      <Header path={props.path} page={props.page} />
+      <CookieStandHeader path={props.path} page={props.page} />
 
       <Main cookieStands={cookieStands} setCookieStands={setCookieStands} onCreate={onCreate} sethoursTotals={sethoursTotals} hoursTotals={hoursTotals} open_hours={open_hours} />
       
