@@ -4,8 +4,8 @@ function LoginForm(props){
 
     return(
         <div>
-        <form onSubmit = {props.saveInfo} className='bg-green-200 p-8 rounded-3xl m-20 border-green-500 p-2'>
-            <label className='p-2 text-center'>USERNAME</label><br/>
+        <form onSubmit = {props.saveInfo} className='bg-green-200 p-8 rounded-3xl m-20 border-green-500 p-2 w-7/12 ml-auto mr-auto'>
+            <label className='p-2 text-center '>USERNAME</label><br/>
             <input className="w-full p-1" type="text" placeholder="Username" id ='username' required /><br/>
   
             <label className='p-2 text-center'>PASSWORD</label><br/>

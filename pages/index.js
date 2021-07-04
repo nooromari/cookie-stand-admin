@@ -7,8 +7,7 @@ const base_url = 'https://noor-cookie-stand.herokuapp.com/'
 
 export default function Home() {
   const [cookieStands, setCookieStands] = React.useState([]);
-  // const [loginInfo, setLoginInfo] = React.useState({})
-
+  const [isLogin, setIsLogin] = React.useState(false)
   
   async function saveInfo(e){
     e.preventDefault();
@@ -16,8 +15,7 @@ export default function Home() {
         username : e.target.username.value ,
         password : e.target.password.value,
       };
-      console.log(loginInfo);
-      // await fetchStands(loginInfo)
+      // console.log(loginInfo);
       getData(loginInfo)
     }
 
@@ -26,6 +24,7 @@ export default function Home() {
   }
 
   async function fetchStands(loginInfo) {
+    try{
     const tokenResponse = await login(loginInfo)
     const { refresh, access: token } = tokenResponse.data;
     const config = {
@@ -34,23 +33,20 @@ export default function Home() {
       }
     }
     const response = await axios.get(`${base_url}api/v1/cookie_stands/`, config);
-    console.log(response.data[0]+'yes');
+    setIsLogin(true)
     return response.data;
+  }catch(error){
+    alert('Wrong username or password')
+  }
+    
   }
 
   async function getData(loginInfo) {
     setCookieStands(await fetchStands(loginInfo));
   }
-  
-  // React.useEffect(() => {
-    
-  //   // getData()
 
-  // })
-
-
-  console.log(cookieStands.length);
-  if (cookieStands.length){
+  // console.log(cookieStands.length);
+  if (isLogin){
   
   return (
     <CookieStandAdmin cookieStands={cookieStands} setCookieStands={setCookieStands} />
