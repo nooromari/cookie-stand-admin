@@ -6,39 +6,56 @@ import axios from 'axios'
 const base_url = 'https://noor-cookie-stand.herokuapp.com/'
 
 export default function Home() {
-
   const [cookieStands, setCookieStands] = React.useState([]);
+  const [loginInfo, setLoginInfo] = React.useState({})
 
-  const effect =() =>{
-    async function fetchStands(){
-      const tokenRes = await axios.post(`${base_url}api/token/`, {
-        username : 'noor',
-        password : '1234@noor',
-      });
-        // console.log(tokenRes.data.access);
-      const {refresh, access} = tokenRes.data;
-      
-      const config = {
-        headers :{
-          Authorization : `Bearer ${access}`
-        }
-      };
-      const res = await axios.get(`${base_url}api/v1/cookie_stands/`, config);
-      // console.log(res.data);
-      setCookieStands(res.data)
+  
+  async function saveInfo(e){
+    e.preventDefault();
+    setLoginInfo({
+        username : e.target.username.value ,
+        password : e.target.password.value,
+      })
+      console.log(loginInfo);
+      // await fetchStands(loginInfo)
     }
-    fetchStands()
+
+  async function login(loginInfo) {
+    return axios.post(`${base_url}api/token/`, loginInfo);
   }
 
-  useEffect(effect,[])
+  async function fetchStands() {
+    const tokenResponse = await login(loginInfo)
+    const { refresh, access: token } = tokenResponse.data;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    const response = await axios.get(`${base_url}api/v1/cookie_stands/`, config);
+    console.log(response.data[0]+'yes');
+    return response.data;
+  }
+
+  async function getData() {
+    setCookieStands(await fetchStands());
+  }
+  
+  React.useEffect(() => {
+    
+    // getData()
+
+  })
+
+
   console.log(cookieStands.length);
   if (cookieStands.length){
   
   return (
-    <CookieStandAdmin cookieStands={cookieStands} />
+    <CookieStandAdmin cookieStands={cookieStands} setCookieStands={setCookieStands} />
   )}else{
     return(
-      <LoginForm />
+      <LoginForm saveInfo ={saveInfo} />
     )
   }
 }

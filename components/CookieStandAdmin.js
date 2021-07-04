@@ -14,14 +14,14 @@ function CookieStandAdmin(props){
 
   const onCreate = (e) =>{
       e.preventDefault()
-      // setCookieStands([...cookieStands, {
-      //   location :e.target.location.value,
-      //   hourly_sales : open_hours.map(()=> Math.ceil((Math.random() *(e.target.max.value - e.target.min.value +1)) + e.target.min.value)*e.target.avg.value),
-      // }])   
+      props.setCookieStands([...props.cookieStands, {
+        location :e.target.location.value,
+        hourly_sales : open_hours.map(()=> Math.ceil((Math.random() *(e.target.max.value - e.target.min.value +1)) + e.target.min.value)*e.target.avg.value),
+      }])   
     };
     
     
-    // React.useEffect(()=> sethoursTotals(open_hours.map((hr,i)=> props.cookieStands.reduce((a,stand )=> a+=stand.hourly_sales[i],0))),[open_hours,props.cookieStands])
+    React.useEffect(()=> sethoursTotals(open_hours.map((hr,i)=> props.cookieStands.reduce((a,stand )=> a+=stand.hourly_sales[i],0))),[open_hours,props.cookieStands])
     
     return(
       <div >
