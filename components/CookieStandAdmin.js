@@ -3,6 +3,7 @@ import CookieStandHeader from './CookieStandHeader'
 import Footer from './Footer'
 import Main from './Main'
 import React, { useEffect, useState } from 'react'
+import { postData } from '../pages/api/api_get_post'
 
 
 function CookieStandAdmin(props){
@@ -12,14 +13,27 @@ function CookieStandAdmin(props){
 
   const [hoursTotals, sethoursTotals] = React.useState([]);
 
-  const onCreate = (e) =>{
+  async function onCreate (e) {
       e.preventDefault()
-      props.setCookieStands([...props.cookieStands, {
+      let new_stand = {
         location :e.target.location.value,
         hourly_sales : open_hours.map(()=> Math.ceil((Math.random() *(e.target.max.value - e.target.min.value +1)) + e.target.min.value)*e.target.avg.value),
-      }])   
+        minimum_customers_per_hour: e.target.min.value,
+        maximum_customers_per_hour: e.target.max.value,
+        average_cookies_per_sale: e.target.avg.value,
+        owner: 1
+      } 
+      await addStand(new_stand)
+      props.setCookieStands([...props.cookieStands, new_stand]);
     };
     
+  async function addStand (newStand){
+    try{
+      await postData(newStand, props.loginInfo)
+    }catch{
+      console.log(error)
+    }
+    }
     
     React.useEffect(()=> sethoursTotals(open_hours.map((hr,i)=> props.cookieStands.reduce((a,stand )=> a+=stand.hourly_sales[i],0))),[open_hours,props.cookieStands])
     
